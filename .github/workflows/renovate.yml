@@ -10,18 +10,16 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Get Access Token
-        run: |
-          echo "AZURE_ACCESS_TOKEN=$(curl -X POST -sSfL -d \
-          "grant_type=client_credentials&\
-          client_id=${{ secrets.AZURE_CLIENT_ID }}&\
-          client_secret=${{ secrets.AZURE_CLIENT_SECRET }}&\
-          resource=https%3A%2F%2Fmanagement.azure.com%2F" \
-          "https://login.microsoftonline.com/${{ secrets.AZURE_TENANT_ID }}/oauth2/token" | \
-          jq -r .access_token)" >> $GITHUB_ENV
+        run: .github/scripts/get_azure_access_token.sh
+        env:
+          AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+          AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
+          AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
 
       - name: Renovate
         uses: renovatebot/github-action@v40.1.0
         with:
+          configurationFile: config.js
           token: ${{ secrets.RENOVATE_TOKEN }}
         env:
           LOG_LEVEL: 'debug'
