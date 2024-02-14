@@ -1,0 +1,44 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended",
+  ],
+  "customDatasources": {
+    "azureWebAppPython": {
+      "defaultRegistryUrlTemplate": "file://azurePythonWebAppStacks.json",
+      "transformTemplates": [
+        "{\"releases\": $$.value[name=\"python\"].properties.majorVersions[value=\"3\"].minorVersions.({\"version\": $.value, \"isDeprecated\": $.stackSettings.linuxRuntimeSettings.isDeprecated})}"
+      ]
+    },
+    "azureWebAppPythonHttp": {
+      "defaultRegistryUrlTemplate": "file://azurePythonWebAppStacks.json",
+      "transformTemplates": [
+        "{\"releases\": $$.value[name=\"python\"].properties.majorVersions[value=\"3\"].minorVersions.({\"version\": $.value, \"isDeprecated\": $.stackSettings.linuxRuntimeSettings.isDeprecated})}"
+      ]
+    }
+  },
+  "customManagers": [
+    {
+      "customType": "regex",
+      "datasourceTemplate": "custom.azureWebAppPython",
+      "depNameTemplate": "azureWebAppPython",
+      "fileMatch": [
+        "\\.bicep$"
+      ],
+      "matchStrings": [
+        "(?:\\/\\/\\s+renovate:(?: datasource=(?<datasource>[a-z-.]+?))?(?: depName=(?<depName>[^\\s]+?))?(?: packageName=(?<packageName>[^\\s]+?))?(?: versioning=(?<versioning>[a-z-0-9]+?))?(?: extractVersion=(?<extractVersion>[^\\s]+?))?)?\\s+linuxFxVersion: 'PYTHON\\|(?<currentValue>[0-9]\\.[0-9]+)'"
+      ]
+    },
+    {
+      "customType": "regex",
+      "datasourceTemplate": "custom.azureWebAppPythonHttp",
+      "depNameTemplate": "azureWebAppPythonHttp",
+      "fileMatch": [
+        "\\.bicep$"
+      ],
+      "matchStrings": [
+        "(?:\\/\\/\\s+renovate:(?: datasource=(?<datasource>[a-z-.]+?))?(?: depName=(?<depName>[^\\s]+?))?(?: packageName=(?<packageName>[^\\s]+?))?(?: versioning=(?<versioning>[a-z-0-9]+?))?(?: extractVersion=(?<extractVersion>[^\\s]+?))?)?\\s+linuxFxVersionHttp: 'PYTHON\\|(?<currentValue>[0-9]\\.[0-9]+)'"
+      ]
+    }
+  ]
+}
