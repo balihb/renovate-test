@@ -11,7 +11,7 @@
       ]
     },
     "azureWebAppPythonHttp": {
-      "defaultRegistryUrlTemplate": "file://azurePythonWebAppStacks.json",
+      "defaultRegistryUrlTemplate": "https://management.azure.com/providers/Microsoft.Web/webAppStacks?stackOsType=Linux&api-version=2022-03-01",
       "transformTemplates": [
         "{\"releases\": $$.value[name=\"python\"].properties.majorVersions[value=\"3\"].minorVersions.({\"version\": $.value, \"isDeprecated\": $.stackSettings.linuxRuntimeSettings.isDeprecated})}"
       ]
