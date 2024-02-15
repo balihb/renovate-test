@@ -16,6 +16,9 @@ jobs:
           AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
           AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
 
+      - name: Check token length
+        run: echo "${AZURE_ACCESS_TOKEN}" | wc -c
+      
       - name: Renovate
         uses: renovatebot/github-action@v40.1.0
         with:
