@@ -4,14 +4,14 @@
     "config:recommended",
   ],
   "customDatasources": {
-    "azureWebAppPython": {
+    "azure-web-app-python": {
       "defaultRegistryUrlTemplate": "file://azurePythonWebAppStacks.json",
       "transformTemplates": [
-        "{\"releases\": $$.value[name=\"python\"].properties.majorVersions[value=\"3\"].minorVersions.({\"version\": $.value, \"isDeprecated\": $.stackSettings.linuxRuntimeSettings.isDeprecated})}"
+        "{\"releases\": $$.value[name=\"python\"].properties.majorVersions[value=\"3\"].minorVersions.({\"version\": $.value, \"isDeprecated\": $.stackSettings.linuxRuntimeSettings.isDeprecated, \"isStable\": $.stackSettings.linuxRuntimeSettings.appInsightsSettings.isSupported})}"
       ]
     },
-    "azureWebAppPythonHttp": {
-      "defaultRegistryUrlTemplate": "https://management.azure.com/providers/Microsoft.Web/webAppStacks?stackOsType=Linux&api-version=2022-03-01",
+    "azure-web-app-python-http": {
+      "defaultRegistryUrlTemplate": "https://management.azure.com/providers/Microsoft.Web/webAppStacks?stackOsType=Linux&api-version=2023-12-01",
       "transformTemplates": [
         "{\"releases\": $$.value[name=\"python\"].properties.majorVersions[value=\"3\"].minorVersions.({\"version\": $.value, \"isDeprecated\": $.stackSettings.linuxRuntimeSettings.isDeprecated})}"
       ]
@@ -20,8 +20,8 @@
   "customManagers": [
     {
       "customType": "regex",
-      "datasourceTemplate": "custom.azureWebAppPython",
-      "depNameTemplate": "azureWebAppPython",
+      "datasourceTemplate": "custom.azure-web-app-python",
+      "depNameTemplate": "azure-web-app-python",
       "fileMatch": [
         "\\.bicep$"
       ],
@@ -31,14 +31,13 @@
     },
     {
       "customType": "regex",
-      "datasourceTemplate": "custom.azureWebAppPythonHttp",
-      "depNameTemplate": "azureWebAppPythonHttp",
       "fileMatch": [
-        "\\.bicep$"
+        "(^|/)tox\\.ini$"
       ],
       "matchStrings": [
-        "(?:\\/\\/\\s+renovate:(?: datasource=(?<datasource>[a-z-.]+?))?(?: depName=(?<depName>[^\\s]+?))?(?: packageName=(?<packageName>[^\\s]+?))?(?: versioning=(?<versioning>[a-z-0-9]+?))?(?: extractVersion=(?<extractVersion>[^\\s]+?))?)?\\s+linuxFxVersionHttp: 'PYTHON\\|(?<currentValue>[0-9]\\.[0-9]+)'"
-      ]
+        "# renovate: datasource=(?<datasource>[a-z-.]+?) depName=(?<depName>[^\\s]+?)(?: packageName=(?<packageName>[^\\s]+?))?(?: versioning=(?<versioning>[a-z-0-9]+?))?(?: extractVersion=(?<extractVersion>[^\\s]+?))?\\s+py(?<currentValue>\\d+)\\s"
+      ],
+      "versioningTemplate": "regex:^(?<major>\\d)(?<minor>\\d+)$"
     }
   ]
 }
