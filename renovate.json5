@@ -37,7 +37,7 @@
       "matchStrings": [
         "# renovate: datasource=(?<datasource>[a-z-.]+?) depName=(?<depName>[^\\s]+?)(?: packageName=(?<packageName>[^\\s]+?))?(?: versioning=(?<versioning>[a-z-0-9]+?))?(?: extractVersion=(?<extractVersion>[^\\s]+?))?\\s+py(?<currentValue>\\d+)\\s"
       ],
-      "versioningTemplate": "regex:^(?<major>\\d)(?<minor>\\d+)$"
+      "versioningTemplate": "regex:(?<major>.)(?<minor>..?)"
     }
   ]
 }
