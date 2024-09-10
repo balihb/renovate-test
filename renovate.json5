@@ -31,6 +31,17 @@
     },
     {
       "customType": "regex",
+      "datasourceTemplate": "custom.azure-web-app-python-http",
+      "depNameTemplate": "azure-web-app-python-http",
+      "fileMatch": [
+        "\\.bicep$"
+      ],
+      "matchStrings": [
+        "(?:\\/\\/\\s+renovate:(?: datasource=(?<datasource>[a-z-.]+?))?(?: depName=(?<depName>[^\\s]+?))?(?: packageName=(?<packageName>[^\\s]+?))?(?: versioning=(?<versioning>[a-z-0-9]+?))?(?: extractVersion=(?<extractVersion>[^\\s]+?))?)?\\s+linuxFxVersionHttp: 'PYTHON\\|(?<currentValue>[0-9]\\.[0-9]+)'"
+      ]
+    },
+    {
+      "customType": "regex",
       "fileMatch": [
         "(^|/)tox\\.ini$"
       ],
