@@ -9,12 +9,6 @@
       "transformTemplates": [
         "{\"releases\": $$.value[name=\"python\"].properties.majorVersions[value=\"3\"].minorVersions.({\"version\": $.value, \"isDeprecated\": $.stackSettings.linuxRuntimeSettings.isDeprecated, \"isStable\": $.stackSettings.linuxRuntimeSettings.appInsightsSettings.isSupported})}"
       ]
-    },
-    "azure-web-app-python-http": {
-      "defaultRegistryUrlTemplate": "https://management.azure.com/providers/Microsoft.Web/webAppStacks?stackOsType=Linux&api-version=2023-12-01",
-      "transformTemplates": [
-        "{\"releases\": $$.value[name=\"python\"].properties.majorVersions[value=\"3\"].minorVersions.({\"version\": $.value, \"isDeprecated\": $.stackSettings.linuxRuntimeSettings.isDeprecated})}"
-      ]
     }
   },
   "customManagers": [
