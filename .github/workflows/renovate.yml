@@ -20,7 +20,7 @@ jobs:
         run: echo "${AZURE_ACCESS_TOKEN}" | wc -c
       
       - name: Renovate
-        uses: renovatebot/github-action@v40.1.0
+        uses: renovatebot/github-action@v40.2.8
         with:
           configurationFile: config.js
           token: ${{ secrets.RENOVATE_TOKEN }}
