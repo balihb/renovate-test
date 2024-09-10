@@ -3,6 +3,6 @@ var functionProperties = {
         // renovate:
         linuxFxVersion: 'PYTHON|3.10'
         // renovate:
-        linuxFxVersionHttp: 'PYTHON|3.10'
+        // linuxFxVersionHttp: 'PYTHON|3.10'
     }
 }
