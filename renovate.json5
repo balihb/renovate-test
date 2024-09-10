@@ -9,6 +9,12 @@
       "transformTemplates": [
         "{\"releases\": $$.value[name=\"python\"].properties.majorVersions[value=\"3\"].minorVersions.({\"version\": $.value, \"isDeprecated\": $.stackSettings.linuxRuntimeSettings.isDeprecated, \"isStable\": $.stackSettings.linuxRuntimeSettings.appInsightsSettings.isSupported})}"
       ]
+    },
+    "azure-web-app-python-http": {
+      "defaultRegistryUrlTemplate": "https://management.azure.com/providers/Microsoft.Web/webAppStacks?stackOsType=Linux&api-version=2023-12-01",
+      "transformTemplates": [
+        "{\"releases\": $$.value[name=\"python\"].properties.majorVersions[value=\"3\"].minorVersions.({\"version\": $.value, \"isDeprecated\": $.stackSettings.linuxRuntimeSettings.isDeprecated})}"
+      ]
     }
   },
   "customManagers": [
@@ -21,17 +27,6 @@
       ],
       "matchStrings": [
         "(?:\\/\\/\\s+renovate:(?: datasource=(?<datasource>[a-z-.]+?))?(?: depName=(?<depName>[^\\s]+?))?(?: packageName=(?<packageName>[^\\s]+?))?(?: versioning=(?<versioning>[a-z-0-9]+?))?(?: extractVersion=(?<extractVersion>[^\\s]+?))?)?\\s+linuxFxVersion: 'PYTHON\\|(?<currentValue>[0-9]\\.[0-9]+)'"
-      ]
-    },
-    {
-      "customType": "regex",
-      "datasourceTemplate": "custom.azure-web-app-python-http",
-      "depNameTemplate": "azure-web-app-python-http",
-      "fileMatch": [
-        "\\.bicep$"
-      ],
-      "matchStrings": [
-        "(?:\\/\\/\\s+renovate:(?: datasource=(?<datasource>[a-z-.]+?))?(?: depName=(?<depName>[^\\s]+?))?(?: packageName=(?<packageName>[^\\s]+?))?(?: versioning=(?<versioning>[a-z-0-9]+?))?(?: extractVersion=(?<extractVersion>[^\\s]+?))?)?\\s+linuxFxVersionHttp: 'PYTHON\\|(?<currentValue>[0-9]\\.[0-9]+)'"
       ]
     },
     {
